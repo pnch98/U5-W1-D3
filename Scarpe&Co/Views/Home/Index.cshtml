@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Scarpe_Co.Models.Prodotto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Prodotti</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="row row-cols-4 gy-3">
+    @foreach (Scarpe_Co.Models.Prodotto prod in Model)
+    {
+        <div class="col">
+            <div class="card">
+                <div style="height: 300px">
+                    <img class="card-img-top h-100" src="@prod.MainImg" />
+                </div>
+                <div class="card-body">
+                    <p class="card-text mb-0">@prod.Name</p>
+                    <p class="card-text font-monospace">@prod.Price</p>
+                    @Html.ActionLink("Vai a dettagli", "Details", new { id = @prod.Id })
+                </div>
+            </div>
+        </div>
+    }
+</div>

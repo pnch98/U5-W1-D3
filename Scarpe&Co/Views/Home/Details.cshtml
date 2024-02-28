@@ -1,0 +1,76 @@
+﻿@model Scarpe_Co.Models.Prodotto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Prodotto</h4>
+    <hr />
+    <div class="row row-cols-2">
+        @if(Model.SideImg1 != null){
+            <div class="col">
+                <div id="carouselExample" class="carousel slide" style="height: 400px; width: 400px">
+                    <div class="carousel-inner h-100 w-100">
+                        <div class="carousel-item active h-100 w-100">
+                            <img src="@Html.DisplayFor(model => model.MainImg)" class="d-block mx-auto h-100" alt="img">
+                        </div>
+                        <div class="carousel-item h-100 w-100">
+                            <img src="@Html.DisplayFor(model => model.SideImg1)" class="d-block mx-auto h-100" alt="img">
+                        </div>
+                        <div class="carousel-item h-100 w-100">
+                            <img src="@Html.DisplayFor(model => model.Sideimg2)" class="d-block mx-auto h-100" alt="img">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            }else
+            {
+                <div class="col" style="height: 400px">
+                    <img src="@Html.DisplayFor(model => model.MainImg)" class="h-100"/>
+                </div>
+            }
+        <div class="col">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+
+            </dl>
+        </div>
+    </div>
+</div>
+<p class="mt-3">
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>
