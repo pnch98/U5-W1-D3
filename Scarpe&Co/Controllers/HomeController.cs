@@ -18,7 +18,7 @@ namespace Scarpe_Co.Controllers
             try
             {
                 conn.Open();
-                string query = "SELECT * FROM Prodotti";
+                string query = "SELECT * FROM Prodotti WHERE show = 'true'";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -32,7 +32,8 @@ namespace Scarpe_Co.Controllers
                         reader["mainImg"].ToString(),
                         reader["descrizione"].ToString(),
                         reader["sideImg1"].ToString(),
-                        reader["sideImg2"].ToString()
+                        reader["sideImg2"].ToString(),
+                        Convert.ToBoolean(reader["show"])
                         );
                     prodotti.Add(product);
                 }
@@ -115,7 +116,8 @@ namespace Scarpe_Co.Controllers
                     reader["mainImg"].ToString(),
                     reader["descrizione"].ToString(),
                     reader["sideImg1"].ToString(),
-                    reader["sideImg2"].ToString()
+                    reader["sideImg2"].ToString(),
+                    Convert.ToBoolean(reader["show"])
                     );
                 }
             }
@@ -126,6 +128,28 @@ namespace Scarpe_Co.Controllers
             finally { conn.Close(); }
 
             return View(product);
+        }
+
+        public ActionResult Hide(int? id)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["ScarpeDB"].ConnectionString;
+            SqlConnection conn = new SqlConnection(connectionString);
+
+            try
+            {
+                conn.Open();
+                string query = "UPDATE Prodotti SET show = 'false' WHERE idScarpa = '" + id + "'";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.Message);
+            }
+            finally { conn.Close(); }
+
+            return RedirectToAction("Index");
         }
     }
 }

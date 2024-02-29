@@ -11,9 +11,10 @@ namespace Scarpe_Co.Models
         public string Description { get; set; }
         public string MainImg { get; set; }
         public string SideImg1 { get; set; }
-        public string Sideimg2 { get; set; }
+        public string SideImg2 { get; set; }
+        public bool Show { get; set; }
         public Prodotto() { }
-        public Prodotto(int id, string name, double price, string mainImg, string description = null, string sideImg1 = null, string sideImg2 = null)
+        public Prodotto(int id, string name, double price, string mainImg, string description = null, string sideImg1 = null, string sideImg2 = null, bool show = true)
         {
             Id = id;
             Name = name;
@@ -21,7 +22,8 @@ namespace Scarpe_Co.Models
             Description = description;
             MainImg = mainImg;
             SideImg1 = sideImg1;
-            Sideimg2 = sideImg2;
+            SideImg2 = sideImg2;
+            Show = show;
         }
     }
 }

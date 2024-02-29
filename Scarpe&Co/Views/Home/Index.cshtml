@@ -6,23 +6,37 @@
 
 <h2>Prodotti</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<div class="row row-cols-4 gy-3">
-    @foreach (Scarpe_Co.Models.Prodotto prod in Model)
-    {
-        <div class="col">
-            <div class="card">
-                <div style="height: 300px">
-                    <img class="card-img-top h-100" src="@prod.MainImg" />
-                </div>
-                <div class="card-body">
-                    <p class="card-text mb-0">@prod.Name</p>
-                    <p class="card-text font-monospace">@prod.Price</p>
-                    @Html.ActionLink("Vai a dettagli", "Details", new { id = @prod.Id })
+@if (Session["user"] != null)
+{
+    <p>
+        @Html.ActionLink("BackOffice", "BackOffice", "Admin")
+    </p>
+}
+    <div class="row row-cols-4 gy-3">
+        @foreach (Scarpe_Co.Models.Prodotto prod in Model)
+        {
+            <div class="col">
+                <div class="card">
+                    <div class="position-relative" style="height: 300px">
+                        <img class="card-img-top h-100" src="@Url.Content(prod.MainImg)" />
+                        @if (Session["user"] != null)
+                        {
+                            Scarpe_Co.Models.Utente user = (Scarpe_Co.Models.Utente)Session["user"];
+                            if (user.IsAdmin == true)
+                            {
+                                <div class="btn btn-transparent position-absolute top-0 end-0 badge rounded-circle bg-danger text-white py-2 px-2 mt-2 me-2">
+                                    @Html.ActionLink("X", "Hide", new { id = prod.Id }, new { @class = "text-white" })
+                                </div>
+                            }
+                        }
+
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-0">@prod.Name</p>
+                        <p class="card-text font-monospace">@prod.Price €</p>
+                        @Html.ActionLink("Vai a dettagli", "Details", new { id = @prod.Id })
+                    </div>
                 </div>
             </div>
-        </div>
-    }
-</div>
+        }
+    </div>

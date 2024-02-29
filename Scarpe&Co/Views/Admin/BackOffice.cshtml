@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Scarpe_Co.Models.Prodotto>
+
+@{
+    ViewBag.Title = "BackOffice";
+}
+
+<h2>BackOffice</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MainImg)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SideImg1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SideImg2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Show)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <img src="@Url.Content(item.MainImg)" style="height: 150px" />
+            </td>
+            @if (item.SideImg1 != "")
+            {
+                <td>
+                    <img src="@Url.Content(item.SideImg1)" style="height: 150px" />
+                </td>
+            }
+            else
+            {
+                <td>
+                    N/A
+                </td>
+            }
+            @if (item.SideImg2 != "")
+            {
+                <td>
+                    <img src="@Url.Content(item.SideImg2)" style="height: 150px" />
+                </td>
+            }
+            else
+            {
+                <td>
+                    N/A
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Show)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", "Home", new { area = "", id = item.Id }, null)
+            </td>
+        </tr>
+    }
+
+</table>
